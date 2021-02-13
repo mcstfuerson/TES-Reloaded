@@ -459,7 +459,7 @@ void ShadowManager::RenderShadowCubeMapInt(NiPointLight** Lights, int LightIndex
 			for (int L = 0; L <= LightIndex; L++) {
 				NiPoint3* LightPos = &Lights[L]->m_worldTransform.pos;
 				float FarPlane = TheShaderManager->ShaderConst.ShadowMap.ShadowLightPosition[L].w;
-				if (Ref->GetNode()->GetDistance(LightPos) <= FarPlane * 1.2f) {
+				if (Ref->GetNode()->GetDistance(LightPos) - Ref->GetNode()->GetWorldBoundRadius() <= FarPlane * 1.2f) {
 					refMap[L].emplace_back(Ref->GetNode());
 				}
 			}
